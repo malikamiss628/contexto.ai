@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contexto AI | Live Data Intelligence</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+<body class="bg-zinc-950 text-zinc-100 h-screen flex overflow-hidden font-sans">
+
+    <div id="plug-overlay" class="fixed inset-0 bg-zinc-950/98 z-50 flex items-center justify-center backdrop-blur-xl">
+        <div class="bg-zinc-900 border border-zinc-800 p-8 rounded-3xl max-w-md w-full shadow-2xl">
+            <div class="w-16 h-16 bg-indigo-600/20 rounded-2xl flex items-center justify-center mb-6 mx-auto border border-indigo-500/30">
+                <i class="ri-flashlight-fill text-3xl text-indigo-500"></i>
+            </div>
+            <h2 class="text-xl font-bold mb-2 text-center">Activate Contexto Engine</h2>
+            <p class="text-zinc-500 text-xs mb-6 text-center">Enter your Gemini API Key to enable live AI translation of your database schema.</p>
+            
+            <div class="space-y-4">
+                <input id="api-key" type="password" placeholder="Gemini API Key" 
+                       class="w-full bg-zinc-950 border border-zinc-800 p-4 rounded-xl text-sm outline-none focus:border-indigo-500 text-indigo-300">
+                
+                <input id="db-uri" type="text" value="postgresql://prod_cluster_01:5432/analytics" 
+                       class="w-full bg-zinc-950 border border-zinc-800 p-4 rounded-xl text-sm outline-none focus:border-zinc-700 text-zinc-500 font-mono">
+                
+                <button onclick="initializeAI()" class="w-full py-4 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl font-bold tracking-widest transition-all shadow-lg shadow-indigo-600/20">
+                    CONNECT & SCAN
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <aside class="w-72 bg-zinc-900 border-r border-zinc-800 flex flex-col">
+        <div class="p-6 border-b border-zinc-800 flex items-center gap-3">
+            <div class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center"><i class="ri-brain-line text-white"></i></div>
+            <h1 class="font-bold text-lg">Contexto <span class="text-indigo-500">AI</span></h1>
+        </div>
+        <div class="p-4 flex-1 relative overflow-y-auto" id="sidebar-container">
+            <div id="laser" class="laser-scanner"></div>
+            <h3 class="text-[10px] font-black text-zinc-500 uppercase tracking-widest mb-4">Detected Tables</h3>
+            <ul id="table-list" class="space-y-1"></ul>
+        </div>
+        <div class="p-4 bg-zinc-950 border-t border-zinc-800">
+            <div id="scanner-logs" class="space-y-1 max-h-32 overflow-y-auto text-[9px] font-mono"></div>
+        </div>
+    </aside>
+
+    <main class="flex-1 flex flex-col">
+        <header class="h-16 bg-zinc-900/50 border-b border-zinc-800 flex items-center px-8 justify-between">
+            <div class="text-xs text-zinc-500">Status: <span class="text-emerald-500 font-bold">● Active Cluster</span></div>
+            <div id="active-db" class="text-xs font-mono text-indigo-400">Not Connected</div>
+        </header>
+
+        <div id="main-content" class="p-8 hidden animate-in fade-in duration-700">
+            <div class="max-w-4xl mx-auto space-y-6">
+                <div class="flex justify-between items-end">
+                    <div>
+                        <h1 id="view-title" class="text-4xl font-black uppercase tracking-tighter italic">Table View</h1>
+                        <p id="view-raw" class="text-xs font-mono text-zinc-500 mt-1"></p>
+                    </div>
+                    <div id="view-health" class="bg-emerald-500/10 text-emerald-500 px-3 py-1 rounded-full text-[10px] font-bold border border-emerald-500/20">99.8% ACCURACY</div>
+                </div>
+                
+                <div id="ai-description" class="p-5 bg-indigo-600/5 border border-indigo-500/20 rounded-2xl text-indigo-200/80 text-sm leading-relaxed"></div>
+
+                <div class="grid grid-cols-3 gap-4">
+                    <div class="bg-zinc-900 border border-zinc-800 p-6 rounded-2xl">
+                        <p class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-1">Row Count</p>
+                        <h4 id="stat-rows" class="text-2xl font-black">--</h4>
+                    </div>
+                    <div class="bg-zinc-900 border border-zinc-800 p-6 rounded-2xl">
+                        <p class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-1">Health Score</p>
+                        <h4 id="stat-health" class="text-2xl font-black text-emerald-400">--</h4>
+                    </div>
+                    <div class="bg-zinc-900 border border-zinc-800 p-6 rounded-2xl">
+                        <p class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-1">Last Fresh</p>
+                        <h4 id="stat-fresh" class="text-2xl font-black text-indigo-400">--</h4>
+                    </div>
+                </div>
+
+                <div class="bg-zinc-900 border border-zinc-800 p-6 rounded-2xl h-64">
+                    <canvas id="healthChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <aside class="w-80 bg-zinc-900 border-l border-zinc-800 flex flex-col">
+        <div class="p-5 border-b border-zinc-800 font-bold text-sm">AI Librarian</div>
+        <div id="chat-area" class="flex-1 p-5 overflow-y-auto space-y-4 text-xs">
+            <div class="text-zinc-500 italic">Connect to start a conversation about your data.</div>
+        </div>
+        <div class="p-4 bg-zinc-950">
+            <input id="chat-input" onkeypress="if(event.key==='Enter')sendChat()" type="text" placeholder="Ask AI about this table..." 
+                   class="w-full p-3 bg-zinc-900 border border-zinc-800 rounded-xl text-xs outline-none focus:border-indigo-500">
+        </div>
+    </aside>
+
+    <script src="app.js"></script>
+</body>
+</html>

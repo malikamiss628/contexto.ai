@@ -1,0 +1,32 @@
+/* Custom Scrollbars */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #27272a; border-radius: 10px; }
+
+/* The Physical Laser Scan Line */
+.laser-scanner {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #6366f1;
+    box-shadow: 0 0 20px 2px #6366f1;
+    z-index: 50;
+    pointer-events: none;
+    display: none;
+}
+
+@keyframes scan-move {
+    0% { top: 0; opacity: 0; }
+    50% { opacity: 1; }
+    100% { top: 100%; opacity: 0; }
+}
+
+.scanning-active {
+    display: block;
+    animation: scan-move 2s linear infinite;
+}
+
+/* UI Polish */
+#table-list li { transition: all 0.2s ease; }
+#table-list li:hover { background: #18181b; transform: translateX(5px); }
