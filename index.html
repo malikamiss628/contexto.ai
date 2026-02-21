@@ -1,0 +1,214 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Data AI | Dictionary</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="app.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+<body class="bg-slate-50 text-slate-900 h-screen flex overflow-hidden">
+
+    <aside class="w-64 bg-white border-r border-slate-200 flex flex-col">
+        <div class="p-6 border-b border-slate-200 font-bold text-indigo-600 flex items-center gap-2">
+            <i class="ri-database-2-line"></i> Nexus AI
+        </div>
+        <div class="p-4 overflow-y-auto flex-1">
+            <h3 class="text-xs font-bold text-slate-400 uppercase mb-4 tracking-widest">Tables</h3>
+            <ul id="table-list" class="space-y-1">
+                </ul>
+        </div>
+    </aside>
+
+    <main class="flex-1 flex flex-col">
+        <header class="h-16 bg-white border-b border-slate-200 flex items-center px-8 justify-between">
+            <div class="flex items-center gap-4 bg-slate-100 px-4 py-2 rounded-lg w-1/2">
+                <i class="ri-search-line text-slate-400"></i>
+                <input type="text" placeholder="Search schema..." class="bg-transparent outline-none w-full text-sm">
+            </div>
+            <div class="flex gap-4">
+                <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded font-bold uppercase">Online: Snowflake</span>
+            </div>
+        </header>
+
+        <div class="p-8 overflow-y-auto">
+            <div id="welcome-screen" class="text-center py-20">
+                <i class="ri-bubble-chart-line text-6xl text-indigo-200"></i>
+                <h2 class="text-2xl font-bold mt-4">Select a table to see AI insights</h2>
+            </div>
+
+            <div id="table-detail" class="hidden">
+                <div class="flex justify-between items-end mb-8">
+                    <div>
+                        <h1 id="active-table-name" class="text-3xl font-black text-slate-800 tracking-tight"></h1>
+                        <p id="ai-summary" class="text-slate-500 mt-2 max-w-2xl italic leading-relaxed"></p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-3 gap-6 mb-8">
+                    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                        <p class="text-xs font-bold text-slate-400 uppercase">Completeness</p>
+                        <h4 id="stat-completeness" class="text-2xl font-mono font-bold text-indigo-600">--</h4>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                        <p class="text-xs font-bold text-slate-400 uppercase">Freshness</p>
+                        <h4 id="stat-freshness" class="text-2xl font-mono font-bold text-green-600">--</h4>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                        <p class="text-xs font-bold text-slate-400 uppercase">Uniqueness</p>
+                        <h4 id="stat-uniqueness" class="text-2xl font-mono font-bold text-orange-500">--</h4>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl border border-slate-200 mb-8">
+                    <h3 class="text-sm font-bold mb-4 flex items-center gap-2"><i class="ri-bar-chart-fill text-indigo-500"></i> Distribution Analysis</h3>
+                    <div class="h-64">
+                        <canvas id="qualityChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <aside class="w-80 bg-white border-l border-slate-200 flex flex-col">
+        <div class="p-4 border-b border-slate-200 font-bold flex items-center gap-2">
+            <i class="ri-magic-line text-indigo-600"></i> AI Assistant
+        </div>
+        <div id="chat-messages" class="flex-1 p-4 overflow-y-auto space-y-4 text-sm">
+            <div class="bg-slate-100 p-3 rounded-lg leading-snug">
+                Ask me about this database. I can explain relationships or write SQL for you.
+            </div>
+        </div>
+        <div class="p-4 border-t border-slate-200">
+            <input id="chat-input" type="text" placeholder="Type a question..." class="w-full p-2 bg-slate-50 border rounded-md text-sm outline-none focus:ring-2 ring-indigo-500">
+        </div>
+    </aside>
+
+</body>
+</html> -->
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CONTEXTO AI | Dictionary</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+<body class="bg-slate-50 text-slate-900 h-screen flex overflow-hidden font-sans">
+
+    <aside class="w-72 bg-white border-r border-slate-200 flex flex-col shadow-sm z-10">
+        <div class="p-6 border-b border-slate-200 font-black text-indigo-600 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <i class="ri-database-2-fill text-xl"></i> CONTEXTO AI
+            </div>
+            <span class="text-[10px] bg-indigo-100 text-indigo-700 px-2 py-1 rounded uppercase tracking-wider">Demo</span>
+        </div>
+        <div class="p-4 overflow-y-auto flex-1">
+            <h3 class="text-xs font-bold text-slate-400 uppercase mb-4 tracking-widest">Data Catalog</h3>
+            <ul id="table-list" class="space-y-1">
+                </ul>
+        </div>
+    </aside>
+
+    <main class="flex-1 flex flex-col bg-slate-50/50">
+        <header class="h-16 bg-white border-b border-slate-200 flex items-center px-8 justify-between shadow-sm">
+            <div class="flex items-center gap-4 bg-slate-100 px-4 py-2 rounded-lg w-1/2 focus-within:ring-2 ring-indigo-500 transition-all">
+                <i class="ri-search-line text-slate-400"></i>
+                <input type="text" placeholder="Search tables, columns, or metrics..." class="bg-transparent outline-none w-full text-sm text-slate-700">
+            </div>
+            <div class="flex items-center gap-4">
+                <button onclick="fetchHackfestDataset()" id="sync-btn" class="text-xs bg-indigo-600 text-white px-4 py-2 rounded font-bold uppercase hover:bg-indigo-700 transition-colors shadow-sm flex items-center gap-2">
+                    <i class="ri-github-fill text-sm"></i> Sync Dataset
+                </button>
+                <span class="text-xs bg-emerald-100 text-emerald-700 px-3 py-2 rounded font-bold uppercase flex items-center gap-1">
+                    <i class="ri-cloud-line"></i> Online
+                </span>
+            </div>
+        </header>
+
+        <div class="p-8 overflow-y-auto flex-1">
+            <div id="welcome-screen" class="flex flex-col items-center justify-center h-full text-center pb-20 mt-20">
+                <div class="w-24 h-24 bg-indigo-50 rounded-full flex items-center justify-center mb-6 shadow-inner">
+                    <i class="ri-bubble-chart-line text-5xl text-indigo-400"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-slate-800">Select a table to view insights</h2>
+                <p class="text-slate-500 mt-2 max-w-md">Or click "Sync Dataset" to dynamically load the hackathon recommendation data.</p>
+            </div>
+
+            <div id="table-detail" class="hidden max-w-5xl mx-auto">
+                <div class="flex justify-between items-end mb-8">
+                    <div>
+                        <div class="flex items-center gap-3 mb-2">
+                            <h1 id="active-table-name" class="text-3xl font-black text-slate-800 tracking-tight"></h1>
+                            <span class="text-[10px] bg-slate-200 text-slate-600 px-2 py-0.5 rounded uppercase font-bold">Table</span>
+                        </div>
+                        <p id="ai-summary" class="text-slate-600 max-w-3xl leading-relaxed bg-white p-4 rounded-lg border border-slate-200 shadow-sm border-l-4 border-l-indigo-500"></p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-3 gap-6 mb-8">
+                    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+                        <div class="flex items-center gap-2 mb-2">
+                            <i class="ri-checkbox-circle-fill text-emerald-500"></i>
+                            <p class="text-xs font-bold text-slate-400 uppercase">Completeness</p>
+                        </div>
+                        <h4 id="stat-completeness" class="text-3xl font-mono font-bold text-slate-800">--</h4>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+                        <div class="flex items-center gap-2 mb-2">
+                            <i class="ri-time-fill text-blue-500"></i>
+                            <p class="text-xs font-bold text-slate-400 uppercase">Freshness</p>
+                        </div>
+                        <h4 id="stat-freshness" class="text-3xl font-mono font-bold text-slate-800">--</h4>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+                        <div class="flex items-center gap-2 mb-2">
+                            <i class="ri-fingerprint-fill text-amber-500"></i>
+                            <p class="text-xs font-bold text-slate-400 uppercase">Uniqueness</p>
+                        </div>
+                        <h4 id="stat-uniqueness" class="text-3xl font-mono font-bold text-slate-800">--</h4>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                    <h3 class="text-sm font-bold mb-6 flex items-center gap-2 text-slate-700">
+                        <i class="ri-bar-chart-fill text-indigo-500 text-lg"></i> Row Volume Trends
+                    </h3>
+                    <div class="h-64">
+                        <canvas id="qualityChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <aside class="w-80 bg-white border-l border-slate-200 flex flex-col shadow-xl z-10">
+        <div class="p-5 border-b border-slate-200 font-bold flex items-center gap-2 text-slate-800">
+            <i class="ri-magic-line text-indigo-600 text-lg"></i> AI Data Assistant
+        </div>
+        <div id="chat-messages" class="flex-1 p-5 overflow-y-auto space-y-4 text-sm flex flex-col">
+            <div class="bg-slate-100 text-slate-800 p-3.5 rounded-xl rounded-tl-sm leading-relaxed shadow-sm w-11/12">
+                Hello! I am your dictionary agent. I can explain schemas, write SQL, or analyze documentation.
+            </div>
+        </div>
+        <div class="p-4 border-t border-slate-200 bg-slate-50">
+            <div class="relative">
+                <input id="chat-input" type="text" placeholder="Ask a question..." class="w-full p-3 pr-10 bg-white border border-slate-300 rounded-lg text-sm outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 shadow-sm transition-all">
+                <button onclick="handleChat()" class="absolute right-2 top-2.5 text-indigo-600 hover:text-indigo-800">
+                    <i class="ri-send-plane-fill text-lg"></i>
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <script src="app.js"></script>
+</body>
+</html>
